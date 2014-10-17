@@ -15,6 +15,7 @@
 				<div class="col-sm-4">
 					<div class="checkbox" ng-repeat="i in jugadores">
 						<label>{{ i.nombre }}</label>
+						<label>{{ i.edad }}</label>
 						<button class="btn-primary" ng-click="deleteJugador(i._id)">Borrar</button>
 					</div>
 				</div>
@@ -44,59 +45,8 @@
 			</div>
 		</div>
 
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-    	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
-    	<script type="text/javascript">
-    		//Module asignado a la variable del ng-app del html
-			var nodeApp = angular.module('nodeApp', []);
-			//Controller del module que se llama como el ng-controller del body
-			nodeApp.controller('mainCtrl', function ($scope,$http) {
-			    $scope.formData = {};
-
-			    $http.get('/jugadores')
-			        .success(function(data) {
-			            $scope.jugadores = data;
-			            console.log(data)
-			        })
-			        .error(function(data) {
-			            console.log('Error: ' + data);
-			        });
-
-
-			    // Cuando se añade un nuevo jugador, manda el texto a la API
-			    $scope.anadirJugador = function(){
-			    	$scope.formData={
-			    		"nombre":$("#nombre").val(),
-			    		/*"edad":$("#edad").val(),
-			    		"equipo":$("#equipo").val(),
-			    		"demarcacion":$("#demarcacion").val()*/
-			    		"edad":30,
-			    		"equipo":"Glorioso",
-			    		"demarcacion":"Delantero"
-			    	}
-			    	//$scope.jugadores=$scope.formData;
-			        $http.post('/jugador', $scope.formData)
-			            .success(function(data) {
-			                $scope.formData = {};
-			                $scope.jugadores = data;
-			            })
-			            .error(function(data) {
-			                console.log('Error:' + data);
-			            });
-			    };
-
-			    // Borra un TODO despues de checkearlo como acabado
-				$scope.deleteJugador = function(id) {
-					$http.delete('/jugador/' + id)
-						.success(function(data) {
-							$scope.jugadores = data;
-							console.log(data);
-						})
-						.error(function(data) {
-							console.log('Error:' + data);
-						});
-				};
-			});
-    	</script>
+		<script type="text/javascript" src="js/lib/jquery-1.10.2.min.js"></script>
+    	<script type="text/javascript" src="js/lib/angular.min.js"></script>
+    	<script type="text/javascript" src="js/main.js"></script>
 	</body>
 </html>

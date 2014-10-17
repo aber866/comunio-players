@@ -12,8 +12,6 @@ module.exports = function(app) {
 
     //POST - Insertar un nuevo jugador
     addJugador = function(req, res) {
-    	console.log('POST');
-    	console.log(req.body);
     	var jugador = new Jugador({
       		nombre  	: req.body.nombre,
       		edad		: req.body.edad,
@@ -35,7 +33,7 @@ module.exports = function(app) {
         	jugador.remove(function(err,jugadores) {
           		if(!err) console.log('Jugador borrado');
           		else console.log('ERROR: ' + err);
-          		//Igual que al añadir, al borrar volvermos a listar los jugadores
+          		//Igual que al añadir, al borrar volvemos a listar los jugadores
         		findAllJugadores(req, res);
         	});
       	});

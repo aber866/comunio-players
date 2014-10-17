@@ -1,0 +1,26 @@
+1. Crear el Package.json con las dependencias y:
+	npm install
+2. Para que el servidor corra, después de crear app.js
+	node app.js
+3. En el navegador (3000 o el puerto que pongamos)
+	http://localhost:3000
+
+MongoDB
+	1. Descargar Mongo e instalar
+		http://www.mongodb.org/downloads?_ga=1.243529089.589564972.1412676072
+	2. Crear data directory (cmd)
+		cd \
+		md \data\db
+	3. cmd como administrador
+		"c:\Program Files\MongoDB 2.6 Standard\bin\mongod.exe"
+	4. abrir otra consola como administrador. Arrancar mongo
+		"c:\Program Files\MongoDB 2.6 Standard\bin\mongo.exe"
+	Consola de mongo una vez que esté arrancado
+		show dbs (Ver bbdd)
+		use angular-tod (usar una de las bbdd de antes)
+		show collections (ver las tablas de la bbdd que se usa)
+		db.tabla.find() (Find: función definida para mostrar resultados de tabla)
+
+4. Arranchar el servidor después de mongodb en las dos consolas
+5. Interactuar con el API con la extensión de chrome rest console.
+

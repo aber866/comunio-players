@@ -3,6 +3,7 @@ var nodeApp = angular.module('nodeApp', []);
 //Controller del module que se llama como el ng-controller del body
 nodeApp.controller('mainCtrl', function ($scope,$http) {
     $scope.formData = {};
+    $scope.idupdate;
 
     $http.get('/jugadores')
         .success(function(data) {
@@ -29,13 +30,14 @@ nodeApp.controller('mainCtrl', function ($scope,$http) {
         .success(function(data) {
             $scope.formData = {};
             $scope.jugadores = data;
+            $scope.restartForm();
         })
         .error(function(data) {
             console.log('Error:' + data);
         });
     };
 
-    // Borra un TODO despues de checkearlo como acabado
+    // Borra un jugador
     $scope.deleteJugador = function(id) {
         $http.delete('/jugador/' + id)
         .success(function(data) {
@@ -46,4 +48,48 @@ nodeApp.controller('mainCtrl', function ($scope,$http) {
             console.log('Error:' + data);
         });
     };
+
+    // Muestra un jugador determinado en el formulario
+    $scope.showJugador = function(id) {
+        $(".addUpt").text("Modificar");
+        $http.get('/jugador/' + id)
+            .success(function(data) {
+                //Rellena los campos del formulario con el get del jugador
+                $("#nombre").val(data.nombre);
+                $("#edad").val(data.edad);
+                $("#equipo").val(data.equipo);
+                $("#demarcacion").val(data.demarcacion);
+                
+                $scope.idupdate=id;
+                $(".btn-add").hide();
+                $(".btn-upd").show();
+            });
+    };
+
+    // Modifica un jugador
+    $scope.updateJugador = function() {
+        $scope.formData={
+            "nombre":$("#nombre").val(),
+            "edad":$("#edad").val(),
+            "equipo":$("#equipo").val(),
+            "demarcacion":$("#demarcacion").val()
+        }
+        $http.put('/jugador/' + $scope.idupdate, $scope.formData)
+        .success(function(data) {
+            $scope.formData = {};
+            $scope.jugadores = data;
+            //
+            $(".addUpt").text("Añadir");
+            $(".btn-add").show();
+            $(".btn-upd").hide();
+            $scope.restartForm();
+        })
+        .error(function(data) {
+            console.log('Error:' + data);
+        });
+    };
+
+    $scope.restartForm = function(){
+        $("form input[type='text'], form input[type='number']").val("");
+    }
 });

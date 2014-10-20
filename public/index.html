@@ -5,6 +5,7 @@
     	<title>Aplicación Node CRUD Jugadores</title>
     	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/styles.css">
 	</head>
 	<body ng-controller="mainCtrl"><!--Es el controller que creamos-->
 		<div class="container">
@@ -17,12 +18,13 @@
 						<label>{{ i.nombre }}</label>
 						<label>{{ i.edad }}</label>
 						<button class="btn-primary" ng-click="deleteJugador(i._id)">Borrar</button>
+						<button class="btn-primary" ng-click="showJugador(i._id)">Modificar</button>
 					</div>
 				</div>
 			</div>
 
 			<div class="page-header">
-			  	<h1>Añadir jugador</h1>
+			  	<h1><span class="addUpt">Añadir</span> jugador</h1>
 			</div>
 			<div class="row">
 				<div class="col-sm-4">
@@ -39,7 +41,8 @@
 					    <div class="form-group">
 					        <input id="demarcacion" name="demarcacion" type="text" class="form-control" placeholder="Demarcacion">
 					    </div>
-					    <button class="btn btn-primary" ng-click="anadirJugador()">Añadir</button>
+					    <button class="btn btn-primary btn-add" ng-click="anadirJugador()">Añadir</button>
+					    <button class="btn btn-primary btn-upd" ng-click="updateJugador()">Modificar</button>
 					</form>
 				</div>
 			</div>

@@ -9,40 +9,60 @@
 	</head>
 	<body ng-controller="mainCtrl"><!--Es el controller que creamos-->
 		<div class="container">
-			<div class="page-header">
-			  	<h1>Listado jugadores</h1>
-			</div>
 			<div class="row">
-				<div class="col-sm-4">
-					<div class="checkbox" ng-repeat="i in jugadores">
-						<label>{{ i.nombre }}</label>
-						<label>{{ i.edad }}</label>
-						<button class="btn-primary" ng-click="deleteJugador(i._id)">Borrar</button>
-						<button class="btn-primary" ng-click="showJugador(i._id)">Modificar</button>
+				<div class="col-md-8">
+					<div class="page-header">
+					  	<h1>Listado jugadores</h1>
+					</div>
+					<div class="table-responsive">
+						<table class="table table-striped table-hover table-condensed">
+							<thead>
+								<tr>
+									<th>Nombre</th>
+									<th>Edad</th>
+									<th>Equipo</th>
+									<th>Demarcación</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="i in jugadores">
+									<td>{{ i.nombre }}</td>
+									<td>{{ i.edad }}</td>
+									<td>{{ i.equipo }}</td>
+									<td>{{ i.demarcacion }}</td>
+									<td><button class="btn-primary" ng-click="deleteJugador(i._id)">Borrar</button></td>
+									<td><button class="btn-primary" ng-click="showJugador(i._id)">Modificar</button></td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
 				</div>
-			</div>
-
-			<div class="page-header">
-			  	<h1><span class="addUpt">Añadir</span> jugador</h1>
-			</div>
-			<div class="row">
-				<div class="col-sm-4">
-					<form>
+				<div class="col-md-4">
+					<div class="page-header">
+					  	<h1><span class="addUpt">Añadir</span> jugador</h1>
+					</div>
+					<form name="playerForm" ng-submit="playerForm.$valid && anadirJugador()" novalidate>
 					    <div class="form-group">
-					        <input id="nombre" name="nombre" type="text" class="form-control" placeholder="Nombre">
+					        <input id="nombre" name="nombre" type="text" class="form-control" placeholder="Nombre" ng-model="mainCtrl.jugadores.nombre" required>
 					    </div>
 					    <div class="form-group">
-					        <input id="edad" name="edad" type="number" class="form-control" placeholder="Edad">
+					        <input id="edad" name="edad" type="number" class="form-control" placeholder="Edad" ng-model="mainCtrl.jugadores.edad" required>
 					    </div>
 					    <div class="form-group">
-					        <input id="equipo" name="equipo" type="text" class="form-control" placeholder="Equipo">
+					        <input id="equipo" name="equipo" type="text" class="form-control" placeholder="Equipo" ng-model="mainCtrl.jugadores.equipo" required>
 					    </div>
 					    <div class="form-group">
-					        <input id="demarcacion" name="demarcacion" type="text" class="form-control" placeholder="Demarcacion">
+					    	<select id="demarcacion" name="demarcacion" class="form-control" title="Demarcacion" ng-model="mainCtrl.jugadores.demarcacion" required>
+					    		<option value="">Demarcación</option>
+								<option value="Portero">Portero</option>
+								<option value="Defensa">Defensa</option>
+								<option value="Centrocampista">Centrocampista</option>
+								<option value="Delantero">Delantero</option>
+							</select>
 					    </div>
-					    <button class="btn btn-primary btn-add" ng-click="anadirJugador()">Añadir</button>
-					    <button class="btn btn-primary btn-upd" ng-click="updateJugador()">Modificar</button>
+					    <!--El submit es solo el añadir, para la validación-->
+					    <input type="submit" class="btn btn-primary btn-add" value="Añadir" ng-disabled="playerForm.$invalid" />
+					    <button type="button" class="btn btn-primary btn-upd" ng-click="updateJugador()">Modificar</button>
 					</form>
 				</div>
 			</div>

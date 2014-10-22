@@ -16,22 +16,24 @@
             });
 
         // Cuando se añade un nuevo jugador, manda el texto a la API
-        $scope.anadirJugador = function(){
-            $scope.formData={
-                "nombre":$("#nombre").val(),
-                "edad":$("#edad").val(),
-                "equipo":$("#equipo").val(),
-                "demarcacion":$("#demarcacion").val()
+        $scope.anadirJugador = function(isValid){
+            if(isValid){
+                $scope.formData={
+                    "nombre":$("#nombre").val(),
+                    "edad":$("#edad").val(),
+                    "equipo":$("#equipo").val(),
+                    "demarcacion":$("#demarcacion").val()
+                }
+                $http.post('/jugador', $scope.formData)
+                .success(function(data) {
+                    $scope.formData = {};
+                    $scope.jugadores = data;
+                    $scope.restartForm();
+                })
+                .error(function(data) {
+                    console.log('Error:' + data);
+                });
             }
-            $http.post('/jugador', $scope.formData)
-            .success(function(data) {
-                $scope.formData = {};
-                $scope.jugadores = data;
-                $scope.restartForm();
-            })
-            .error(function(data) {
-                console.log('Error:' + data);
-            });
         };
 
         // Borra un jugador
@@ -87,8 +89,7 @@
         };
 
         $scope.restartForm = function(){
-            $("form input[type='text'], form input[type='number'], form select").val("")
-            .removeClass("ng-dirty");
+            $("form input[type='text'], form input[type='number'], form select").val("");
         }
     });
 })();

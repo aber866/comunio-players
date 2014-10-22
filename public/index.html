@@ -41,7 +41,7 @@
 					<div class="page-header">
 					  	<h1><span class="addUpt">Añadir</span> jugador</h1>
 					</div>
-					<form name="playerForm" ng-submit="playerForm.$valid && anadirJugador()" novalidate>
+					<form name="playerForm" ng-submit="anadirJugador(playerForm.$valid)" novalidate>
 					    <div class="form-group">
 					        <input id="nombre" name="nombre" type="text" class="form-control" placeholder="Nombre" ng-model="mainCtrl.jugadores.nombre" required>
 					    </div>

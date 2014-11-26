@@ -19,10 +19,10 @@
         $scope.anadirJugador = function(isValid){
             if(isValid){
                 $scope.formData={
-                    "nombre":$("#nombre").val(),
-                    "edad":$("#edad").val(),
-                    "equipo":$("#equipo").val(),
-                    "demarcacion":$("#demarcacion").val()
+                    "nombre":$scope.jugadores.nombre,
+                    "edad":$scope.jugadores.edad,
+                    "equipo":$scope.jugadores.equipo,
+                    "demarcacion":$scope.jugadores.demarcacion
                 }
                 $http.post('/jugador', $scope.formData)
                 .success(function(data) {
@@ -54,10 +54,14 @@
             $http.get('/jugador/' + id)
                 .success(function(data) {
                     //Rellena los campos del formulario con el get del jugador
-                    $("#nombre").val(data.nombre);
+                    $scope.jugadores.nombre=data.nombre;
+                    $scope.jugadores.edad=data.edad;
+                    $scope.jugadores.equipo=data.equipo;
+                    $scope.jugadores.demarcacion=data.demarcacion;
+                    /*$("#nombre").val(data.nombre);
                     $("#edad").val(data.edad);
                     $("#equipo").val(data.equipo);
-                    $("#demarcacion").val(data.demarcacion);
+                    $("#demarcacion").val(data.demarcacion);*/
                     //Se prepara para modificar
                     $scope.idupdate=id;
                     $(".btn-add").hide();
@@ -68,10 +72,10 @@
         // Modifica un jugador
         $scope.updateJugador = function() {
             $scope.formData={
-                "nombre":$("#nombre").val(),
-                "edad":$("#edad").val(),
-                "equipo":$("#equipo").val(),
-                "demarcacion":$("#demarcacion").val()
+                "nombre":$scope.jugadores.nombre,
+                "edad":$scope.jugadores.edad,
+                "equipo":$scope.jugadores.equipo,
+                "demarcacion":$scope.jugadores.demarcacion
             }
             $http.put('/jugador/' + $scope.idupdate, $scope.formData)
             .success(function(data) {

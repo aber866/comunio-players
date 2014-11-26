@@ -25,7 +25,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr ng-repeat="i in jugadores">
+								<tr ng-repeat="i in jugadores | orderBy: '-demarcacion'">
 									<td>{{ i.nombre }}</td>
 									<td>{{ i.edad }}</td>
 									<td>{{ i.equipo }}</td>
@@ -43,16 +43,16 @@
 					</div>
 					<form name="playerForm" ng-submit="anadirJugador(playerForm.$valid)" novalidate>
 					    <div class="form-group">
-					        <input id="nombre" name="nombre" type="text" class="form-control" placeholder="Nombre" ng-model="mainCtrl.jugadores.nombre" required>
+					        <input id="nombre" name="nombre" type="text" class="form-control" placeholder="Nombre" ng-model="jugadores.nombre" required>
 					    </div>
 					    <div class="form-group">
-					        <input id="edad" name="edad" type="number" class="form-control" placeholder="Edad" ng-model="mainCtrl.jugadores.edad" required>
+					        <input id="edad" name="edad" type="number" class="form-control" placeholder="Edad" ng-model="jugadores.edad" required>
 					    </div>
 					    <div class="form-group">
-					        <input id="equipo" name="equipo" type="text" class="form-control" placeholder="Equipo" ng-model="mainCtrl.jugadores.equipo" required>
+					        <input id="equipo" name="equipo" type="text" class="form-control" placeholder="Equipo" ng-model="jugadores.equipo" required>
 					    </div>
 					    <div class="form-group">
-					    	<select id="demarcacion" name="demarcacion" class="form-control" title="Demarcacion" ng-model="mainCtrl.jugadores.demarcacion" required>
+					    	<select id="demarcacion" name="demarcacion" class="form-control" title="Demarcacion" ng-model="jugadores.demarcacion" required>
 					    		<option value="">Demarcación</option>
 								<option value="Portero">Portero</option>
 								<option value="Defensa">Defensa</option>
